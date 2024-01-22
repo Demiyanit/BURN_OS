@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "GCC",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/kernel",
+                "${workspaceFolder}/toolchain/i686-elf/lib/gcc/i686-elf/11.2.0/include"
+            ],
+            "defines": [
+                "__builtin_va_arg(v,l)= ((void*)0)",
+                "__attribute__(o)= "
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86",
+            "compilerArgs": [
+                "-std=c99", "-ffreestanding", "-nostdlib"
+            ]
+        }
+    ],
+    "version": 4
+}

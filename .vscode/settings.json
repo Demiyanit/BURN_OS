@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "x86.h": "c",
+        "stdio.h": "c",
+        "iterator": "c",
+        "memory": "c",
+        "random": "c",
+        "xutility": "c",
+        "ranges": "c",
+        "gdt.h": "c",
+        "binary.h": "c",
+        "isr.h": "c",
+        "idt.h": "c",
+        "pic.h": "c",
+        "stdbool.h": "c"
+    },
+    "extensions.autoCheckUpdates": false,
+    "extensions.autoUpdate": false
+}
