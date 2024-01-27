@@ -15,6 +15,8 @@
 
 // 0x00020000 - 0x00030000 - stage2
 
+#define MEMORY_VESA_INFO 0x30000
+
 // 0x00030000 - 0x00080000 - free
 
 // 0x00080000 - 0x0009FFFF - Extended BIOS data area

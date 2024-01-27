@@ -111,7 +111,7 @@ A20WaitOutput:
     jz A20WaitOutput
     ret
 
-
+global LoadGDT
 LoadGDT:
     [bits 16]
     lgdt [g_GDTDesc]

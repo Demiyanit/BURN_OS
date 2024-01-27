@@ -1,3 +1,5 @@
+extern LoadGDT
+
 %macro x86_EnterRealMode 0
     [bits 32]
     jmp word 18h:.pmode16         ; 1 - jump to 16-bit protected mode segment
@@ -26,7 +28,8 @@
 
 %macro x86_EnterProtectedMode 0
     cli
-
+    call LoadGDT
+    
     ; 4 - set protection enable flag in CR0
     mov eax, cr0
     or al, 1
@@ -239,6 +242,36 @@ x86_Disk_Read:
 
     x86_EnterProtectedMode
 
+    pop eax
+
+    ; restore old call frame
+    mov esp, ebp
+    pop ebp
+    ret
+
+global x86_Video_GetVbeInfo
+x86_Video_GetVbeInfo:
+    ; make new call frame
+    push ebp             ; save old call frame
+    mov ebp, esp          ; initialize new call frame
+
+    x86_EnterRealMode
+
+    push edi
+    push es
+    push ebp
+
+    LinearToSegOffset [bp + 8], es, edi, di
+
+    mov ax, 0x4f00
+    int 10h
+
+    pop ebp
+    pop es
+    pop edi
+
+    push eax
+    x86_EnterProtectedMode
     pop eax
 
     ; restore old call frame

@@ -5,6 +5,7 @@
 #include "fat.h"
 #include "memdefs.h"
 #include "memory.h"
+#include "vbe.h"
 
 uint8_t* KernelLoadBuffer = (uint8_t*)MEMORY_LOAD_KERNEL;
 uint8_t* Kernel = (uint8_t*)MEMORY_KERNEL_ADDR;
@@ -39,9 +40,17 @@ void __attribute__((cdecl)) start(uint16_t bootDrive)
     }
     FAT_Close(fd);
 
+    // Initialize graphics
+    VbeInfoBlock* info = (VbeInfoBlock*)MEMORY_VESA_INFO;
+    if(VBE_GetControllerInfo(info)) {
+        printf("Found VBE extensions!\n");
+    } else {
+        printf("No VBE extensions :(\n");
+    }
+
     // execute kernel
     KernelStart kernelStart = (KernelStart)Kernel;
-    kernelStart();
+    //kernelStart();
 
 end:
     for (;;);
