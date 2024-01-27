@@ -13,7 +13,8 @@
         "idt.h": "c",
         "pic.h": "c",
         "stdbool.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "stdint.h": "c"
     },
     "extensions.autoCheckUpdates": false,
     "extensions.autoUpdate": false

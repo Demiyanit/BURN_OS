@@ -42,8 +42,18 @@ void __attribute__((cdecl)) start(uint16_t bootDrive)
 
     // Initialize graphics
     VbeInfoBlock* info = (VbeInfoBlock*)MEMORY_VESA_INFO;
+    VbeModeInfo* modeInfo = (VbeModeInfo*)MEMORY_MODE_INFO;
     if(VBE_GetControllerInfo(info)) {
-        printf("Found VBE extensions!\n");
+        uint16_t* mode = (uint16_t*)(info->VideoModePtr);
+        for(int i = 0; mode[i] != 0xFFFF; i++) {
+            if(!VBE_GetModeInfo(mode[i], modeInfo)) {
+                printf("Cant get mode Info %x :(\n", mode[i]);
+                continue; 
+            }
+            
+            printf("Found mode %x: %dx%d, bpp:%d, fb:0x%x\n", mode[i], modeInfo->width, modeInfo->height, modeInfo->bpp, modeInfo->framebuffer);
+
+        }
     } else {
         printf("No VBE extensions :(\n");
     }
